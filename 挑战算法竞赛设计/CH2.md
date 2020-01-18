@@ -1,5 +1,55 @@
 ## 第二章
 ### 2.1 穷竭搜索
+- 递归函数：必须有终止条件;重复调用数可用记忆化搜索或动态规划优化
+- 栈: 移除s.pop();插入n s.push(n);取顶n=s.top()
+- 队列: 移除que.pop();插入n que.push(n);取顶n=que.front()
+- 深度优先搜索DFS O(2^n)
+1. 部分和问题
+```cpp
+bool dfs(int i,int sum){
+    if(i==n) return sum==k;
+    if(dfs(i+1,sum)) return true;
+    if(dfs(i+1,sum+a[i])) return true;
+    return false;
+}
+```
+2. 水洼问题：求8连通积水
+```cpp
+循环至有W的地方开始dfs
+void dfs(int x,int y){
+    field[x][y]='.';
+    for(int dx=-1;dx<=1;dx++){
+        for(int dy=-1;dy<=1;dy++){
+            int nx=x+dx,ny=y+dy;
+            if(0<=nx&&nx<N&&0<=ny&&ny<M&&field[nx][ny]=='W')
+            dfs(nx,ny);
+        }
+    }
+    return ;
+}
+res++
+``` 
+- 深度优先算法BFS O(状态数*转移方式)
+DFS：栈；BFS: 队列
+1. 迷宫最短路径
+```cpp
+int d[MAX_N][MAX_M];//到各个位置最短距离的数组
+typedef pair<int,int> P;
+int bfs(){
+    queue<p> que;
+    **初始化前N*M个d[i][j]为INF**
+    que.push(P(sx,sy));
+    d[sx][sy]=0;
+    //不断循环直至队列长度为0
+    while(que.size()){
+        P p=que.front();
+        que.pop
+    }
+}
+```
+
+
+
 ### 2.2 贪心算法
 ### 2.3 记录结果再利用的“动态规划”
 DP:Dynamic Programming 动态规划 算法
