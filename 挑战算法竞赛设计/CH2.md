@@ -27,11 +27,11 @@ void dfs(int x,int y){
     }
     return ;
 }
-res++
+res++;
 ``` 
 - 深度优先算法BFS O(状态数*转移方式)
 DFS：栈；BFS: 队列
-1. 迷宫最短路径
+1. 迷宫最短路径步数
 ```cpp
 int d[MAX_N][MAX_M];//到各个位置最短距离的数组
 typedef pair<int,int> P;
@@ -39,14 +39,29 @@ int bfs(){
     queue<p> que;
     **初始化前N*M个d[i][j]为INF**
     que.push(P(sx,sy));
-    d[sx][sy]=0;
+    d[sx][sy]=0;//将起点加入队列，并把这一地点的距离置为0
+
     //不断循环直至队列长度为0
     while(que.size()){
+        //从前端取出元素
         P p=que.front();
-        que.pop
+        que.pop();
+        //若取出的状态是终点，则结束搜索
+        if(p.first==gx&&p.second==gy) break;
+
+        //四个方向循环
+        for(int i=0;i<4;i++){
+            int nx=p.first+dx[i],ny=p.second+dy[i];
+            if(0<=nx&&nx<N&&0<=ny&&ny<M&&maze[nx][ny]!='#'&&d[nx][ny]==INF){
+                que.push(P(nx,ny));
+                d[nx][ny]=d[p.first][p.second]+1;
+            }
+        }
     }
+    return d[gx][gy];
 }
 ```
+- 建议：遍历使用DFS（递归和状态管理更简单）；最短路径使用BFS（DFS会重复经过同样状态）
 
 
 
